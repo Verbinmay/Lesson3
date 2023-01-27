@@ -1,5 +1,8 @@
 import { MongoClient } from "mongodb";
-import { ProductType } from "./products-db-repository";
+export type ProductType = {
+  id: number;
+  title: string;
+};
 
 const mongoUri =
   process.env.mongoURI || "mongodb://0.0.0.0:27017";
