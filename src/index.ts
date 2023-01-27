@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import bodyParser from "body-parser";
 import { runDb } from "./repositories/db";
+import { productsRouter } from "./routes/products-router";
 
 const app = express();
 
