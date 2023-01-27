@@ -1,12 +1,15 @@
 import { MongoClient } from "mongodb";
+import * as dotenv from 'dotenv'
+dotenv.config()
 export type ProductType = {
   id: number;
   title: string;
 };
 
-const mongoUri =
-  process.env.mongoURI || "mongodb://0.0.0.0:27017";
-
+const mongoUri = process.env.MONGO_URL;
+if (!mongoUri){
+  throw new Error('! URL DOESNT FOUND ')
+}
 export const client = new MongoClient(mongoUri);
 
 const db = client

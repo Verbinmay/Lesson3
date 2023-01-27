@@ -31,3 +31,5 @@ export const productsRepository = {
     return result.deletedCount === 1;
   },
 };
+export { ProductType };
+
