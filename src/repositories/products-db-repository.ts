@@ -1,4 +1,4 @@
-import {productsCollections, ProductType } from "./db";
+import { productsCollections, ProductType } from "./db";
 
 export const productsRepository = {
   async findProducts(title: string | null | undefined): Promise<ProductType[]> {
@@ -9,21 +9,20 @@ export const productsRepository = {
     return productsCollections.find(filter).toArray();
   },
   async findProductById(id: number): Promise<ProductType | null> {
-    let product = await productsCollections.findOne({ id: id });
-    if (product) {
-      return product;
-    } else {
-      return null;
-    }
+    let product: ProductType | null = await productsCollections.findOne({
+      id: id,
+    });
+    return product;
   },
-  async createProduct(title: string): Promise<ProductType> {
-    const newProduct = { id: +new Date(), title: title };
+  async createProduct(newProduct: ProductType): Promise<ProductType> {
     const result = await productsCollections.insertOne(newProduct);
     return newProduct;
   },
   async updateProduct(id: number, title: string): Promise<boolean> {
-    const result = await productsCollections
-      .updateOne({ id: id }, { $set: { title: title } });
+    const result = await productsCollections.updateOne(
+      { id: id },
+      { $set: { title: title } }
+    );
     return result.matchedCount === 1;
   },
   async deleteProduct(id: number): Promise<boolean> {
@@ -32,4 +31,3 @@ export const productsRepository = {
   },
 };
 export { ProductType };
-

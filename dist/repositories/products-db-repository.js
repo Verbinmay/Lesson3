@@ -23,26 +23,21 @@ exports.productsRepository = {
     },
     findProductById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            let product = yield db_1.productsCollections.findOne({ id: id });
-            if (product) {
-                return product;
-            }
-            else {
-                return null;
-            }
+            let product = yield db_1.productsCollections.findOne({
+                id: id,
+            });
+            return product;
         });
     },
-    createProduct(title) {
+    createProduct(newProduct) {
         return __awaiter(this, void 0, void 0, function* () {
-            const newProduct = { id: +new Date(), title: title };
             const result = yield db_1.productsCollections.insertOne(newProduct);
             return newProduct;
         });
     },
     updateProduct(id, title) {
         return __awaiter(this, void 0, void 0, function* () {
-            const result = yield db_1.productsCollections
-                .updateOne({ id: id }, { $set: { title: title } });
+            const result = yield db_1.productsCollections.updateOne({ id: id }, { $set: { title: title } });
             return result.matchedCount === 1;
         });
     },
